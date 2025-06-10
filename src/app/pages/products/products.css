@@ -1,0 +1,14 @@
+.productos{
+    display: grid;
+grid-template-columns: repeat(5,1fr);    /* gap: 10px; */
+gap: 10px;
+margin: 20px;
+}
+.producto{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
