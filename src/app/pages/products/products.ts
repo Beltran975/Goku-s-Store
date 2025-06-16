@@ -1,15 +1,21 @@
-import { Component } from '@angular/core';
-import { Product } from '../../services/products';
-import { Products } from '../../services/products';
+import { Component, OnInit } from '@angular/core';
+import { Product, ProductsService } from '../../services/products';
+
 @Component({
   selector: 'app-products',
-  imports: [],
   templateUrl: './products.html',
-  styleUrl: './products.css'
+  styleUrls: ['./products.css']
 })
-export class Productos {
-  productos : Product[] = [];
-  constructor(private product:Products){
-    this.productos = this.product.getProducts();
+export class ProductsComponent implements OnInit {
+  productos: Product[] = [];
+
+  constructor(private productsService: ProductsService) {}
+
+  ngOnInit() {
+    this.productos = this.productsService.getProducts();
+  }
+
+  trackById(index: number, producto: Product): number {
+    return producto.id;
   }
 }

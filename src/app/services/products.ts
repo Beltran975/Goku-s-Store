@@ -12,7 +12,7 @@ export interface Product{
   providedIn: 'root'
 })
 
-export class Products {
+export class ProductsService {
   
   private products:Product[] = [
     {
