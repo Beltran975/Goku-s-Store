@@ -1,14 +1,40 @@
 <h1>Nuestros productos</h1>
 <img src="/img/banner1.jpg" alt="Moto">
 <section class="productos">
-    @for(producto of productos; track producto.id){
-        <article class="producto">
-            <img [src]="producto.imagen" [alt]="producto.nombre">
-            <h3>{{producto.nombre}}</h3>
-            <p>{{producto.descripcion}}</p>
-            <strong>{{producto.precio}}</strong>
-            <br>
-            <button>Ver más</button>
-        </article>
-    }
+  <article class="producto" *ngFor="let producto of productos; trackBy: trackById">
+    <img [src]="producto.imagen" [alt]="producto.nombre" />
+    <h3>{{producto.nombre}}</h3>
+    <p>{{producto.descripcion}}</p>
+    <strong>{{producto.precio}}</strong>
+    <br />
+    <button (click)="abrirModal(producto)">Ver más</button>
+  </article>
 </section>
+
+<!-- Modal -->
+<div class="modal" *ngIf="modalVisible" (click)="cerrarModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <button class="close-btn" (click)="cerrarModal()">×</button>
+    
+    <img [src]="productoSeleccionado?.imagen" [alt]="productoSeleccionado?.nombre" />
+    
+    <h2>{{ productoSeleccionado?.nombre }}</h2>
+    <p>{{ productoSeleccionado?.descripcion }}</p>
+    <strong>Precio: {{ productoSeleccionado?.precio }}</strong>
+    
+    <!-- Mostrar detalles solo si existen -->
+    <p *ngIf="productoSeleccionado?.detalles">
+      <strong>Detalles:</strong> {{ productoSeleccionado?.detalles }}
+    </p>
+    
+    <!-- Mostrar características si existen -->
+    <div *ngIf="productoSeleccionado?.caracteristicas?.length">
+      <strong>Características:</strong>
+      <ul>
+        <li *ngFor="let caracteristica of productoSeleccionado?.caracteristicas">
+          {{ caracteristica }}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
