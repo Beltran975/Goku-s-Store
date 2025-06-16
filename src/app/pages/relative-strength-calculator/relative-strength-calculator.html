@@ -1,0 +1,25 @@
+<h1>Calculadora de Fuerza Relativa</h1>
+
+<form (ngSubmit)="calcularFuerza()">
+  <label>Peso corporal (kg):
+    <input type="number" [(ngModel)]="peso" name="peso" required>
+  </label>
+
+  <label>Peso levantado (kg):
+    <input type="number" [(ngModel)]="total" name="total" required>
+  </label>
+
+  <label>Sexo:
+    <select [(ngModel)]="sexo" name="sexo">
+      <option value="masculino">Masculino</option>
+      <option value="femenino">Femenino</option>
+    </select>
+  </label>
+
+  <div *ngIf="resultado" class="resultado">
+    <h3>Resultado</h3>
+    <p><strong>Wilks Score:</strong> {{ resultado }}</p>
+  </div>
+
+  <button type="submit">Calcular</button>
+</form>
